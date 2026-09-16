@@ -103,13 +103,7 @@ The project includes:
 
 ## Live Demo
 
-**Deployed Preview URL:**
-
-Add your GitHub Pages URL here after deployment.
-
-```text
-YOUR-LIVE-URL-HERE
-```
+https://devishri23.github.io/responsive-internship-board/
 
 ## Project Status
 
