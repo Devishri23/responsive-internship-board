@@ -1,32 +1,32 @@
 # Responsive Internship Board
 
-A responsive and accessible internship listing interface built using HTML, CSS, and JavaScript without using any framework.
+## Project Description
 
-Project Overview
+Responsive Internship Board is a simple and accessible web application that helps users find and explore internship opportunities.
 
-The Responsive Internship Board allows users to search and filter internship opportunities by keyword and domain.
+The website is responsive and works across mobile, tablet, and desktop devices.
 
-The interface is designed to work smoothly on:
+Internship data is loaded dynamically from a JSON file using JavaScript.
 
-* Mobile
-* Tablet
-* Desktop
+## Features
 
-Internship information is loaded dynamically from a JSON file.
+* Responsive design for mobile, tablet, and desktop
+* Internship listings loaded from JSON
+* Search internships by:
 
-Features
+  * Title
+  * Domain
+  * Skills
+* Filter internships by domain
+* Empty state when no internship matches the search
+* Error state when internship data cannot be loaded
+* Loading state while data is being fetched
+* Keyboard-friendly navigation
+* Visible focus indicators
+* Accessible form labels
+* Apply Now / View Internship interaction with internship selection alert
 
-*  Search internships by title, domain, location, mode, or skills
-*  Filter internships by domain
-*  Responsive design for mobile, tablet, and desktop
-*  Accessible form labels and keyboard navigation
-*  Dynamic internship cards using JavaScript
-*  Internship data loaded from JSON
-*  Error state when internship data cannot be loaded
-*  Empty state when no internship matches the search
-*  Keyboard-friendly controls
-
-Technologies Used
+## Technologies Used
 
 * HTML5
 * CSS3
@@ -35,54 +35,88 @@ Technologies Used
 
 No framework or external UI library is used.
 
-Project Structure
+## Project Structure
 
+```text
 responsive-internship-board/
 │
 ├── index.html
 ├── style.css
 ├── script.js
-├── internships.json
+├── internship-records-sample.json
+├── screenshots/
+│   ├── desktop.png
+│   ├── mobile.png
+│   └── search-filter.png
 └── README.md
 ```
 
-Internship Data
+## How to Run
 
-The project currently contains internship opportunities in domains such as:
+1. Download or clone the project.
+2. Open the project folder in Visual Studio Code.
+3. Install the **Live Server** extension.
+4. Open `index.html`.
+5. Click **Go Live**.
+6. The project will open in the browser.
 
-* Full Stack Development
-* UI/UX
-* Data Analytics
-* Cyber Security
+Live Server is recommended because the project loads internship data from the JSON file using JavaScript `fetch()`.
 
-The internship data is stored in `internships.json` and rendered dynamically using JavaScript.
+## Responsive Testing
 
-Accessibility
+The project was tested for different screen sizes:
 
-The project includes accessibility-focused features such as:
+| Screen Size | Layout                     |
+| ----------- | -------------------------- |
+| 360px       | 1 internship card per row  |
+| 768px       | 2 internship cards per row |
+| Desktop     | 3 internship cards per row |
+
+## Search Testing
+
+Examples tested:
+
+* `JavaScript` → Frontend Intern
+* `SQL` → API Engineering Intern and Data Analyst Intern
+* `Figma` → UI/UX Intern
+* `Linux` → Security Operations Intern
+* `xyz123` → No internships found
+
+## Domain Filter Testing
+
+* `UI/UX` → UI/UX Intern
+* `Cyber Security` → Security Operations Intern
+* `Full Stack Development` → Frontend Intern and API Engineering Intern
+* `Data Analytics` → Data Analyst Intern
+
+## Accessibility
+
+The project includes:
 
 * Semantic HTML elements
-* Proper form labels
+* Labels for form controls
 * Keyboard navigation
 * Visible focus indicators
-* `aria-live` for dynamic results
-* `role="alert"` for error messages
+* ARIA labels and status messages
 * Accessible buttons
+* Responsive layouts
 
+## Live Demo
 
-How to Run Locally
+**Deployed Preview URL:**
 
-1. Clone or download this repository.
-2. Open the project folder in VS Code.
-3. Open `index.html` using Live Server.
-4. Search and filter the internship listings.
+Add your GitHub Pages URL here after deployment.
 
-Live Server is recommended because the project loads internship data using JavaScript `fetch()` from `internships.json`.
-
-Live Demo
-
-Add your deployed GitHub Pages URL here:
-
+```text
 YOUR-LIVE-URL-HERE
+```
 
-Built as a responsive frontend development practice project.
+## Project Status
+
+**Completed**
+
+The project implements responsive layouts, JSON-based internship data, search and domain filtering, empty and error states, loading handling, and accessibility-focused interactions.
+
+## Author
+
+**Devishri Motekar**
