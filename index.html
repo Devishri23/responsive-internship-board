@@ -4,14 +4,15 @@
 <head>
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <!-- Responsive viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta name="description"
-          content="Responsive Internship Board - Search and filter internship opportunities">
+        content="Responsive Internship Board for finding internships by title, company, and domain.">
 
     <title>Responsive Internship Board</title>
 
+    <!-- CSS file -->
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -19,113 +20,146 @@
 
     <!-- Header -->
     <header class="site-header">
-
         <div class="container">
-
             <h1>Internship Board</h1>
 
             <p>
-                Find your next internship opportunity
+                Find internships that match your skills and career goals.
             </p>
-
         </div>
-
     </header>
 
+    <!-- Main content -->
+    <main>
 
-    <!-- Main Content -->
-    <main class="container">
+        <!-- Search and filter section -->
+        <section class="search-section" aria-labelledby="search-heading">
 
-        <!-- Search and Filter -->
-        <section class="filter-section"
-                 aria-label="Search and filter internships">
+            <div class="container">
 
-            <!-- Search -->
-            <div class="form-group">
+                <h2 id="search-heading">Find an Internship</h2>
 
-                <label for="searchInput">
-                    Search Internships
-                </label>
+                <form id="searchForm">
 
-                <input
-                    type="search"
-                    id="searchInput"
-                    placeholder="Search by title, domain or skill"
-                    autocomplete="off"
-                    aria-describedby="searchHelp"
-                >
+                    <!-- Search input -->
+                    <div class="form-group">
 
-                <small id="searchHelp">
-                    Enter internship title, domain or skill.
-                </small>
+                        <label for="searchInput">
+                            Search internships
+                        </label>
 
-            </div>
+                        <input
+                            type="search"
+                            id="searchInput"
+                            name="search"
+                            placeholder="Search by title, company, or skill"
+                            autocomplete="off"
+                        >
 
+                    </div>
 
-            <!-- Domain Filter -->
-            <div class="form-group">
+                    <!-- Domain filter -->
+                    <div class="form-group">
 
-                <label for="domainFilter">
-                    Filter by Domain
-                </label>
+                        <label for="domainFilter">
+                            Filter by domain
+                        </label>
 
-                <select id="domainFilter">
+                        <select id="domainFilter" name="domain">
 
-                    <option value="all">
-                        All Domains
-                    </option>
+                            <option value="all">
+                                All Domains
+                            </option>
 
-                </select>
+                            <option value="Java">
+                                Java
+                            </option>
+
+                            <option value="Web Development">
+                                Web Development
+                            </option>
+
+                            <option value="Python">
+                                Python
+                            </option>
+
+                            <option value="React">
+                                React
+                            </option>
+
+                            <option value="Data Science">
+                                Data Science
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- Search button -->
+                    <button type="submit">
+                        Search
+                    </button>
+
+                </form>
 
             </div>
 
         </section>
 
-
-        <!-- Loading Message -->
-        <p id="loadingMessage"
-           class="message"
-           role="status">
-
-            Loading internships...
-
-        </p>
-
-
-        <!-- Error Message -->
-        <div id="errorMessage"
-             class="message error"
-             role="alert"
-             hidden>
-
-            Unable to load internship records.
-            Please try again.
-
-        </div>
-
-
-        <!-- Empty Message -->
-        <div id="emptyMessage"
-             class="message"
-             role="status"
-             hidden>
-
-            No internships found.
-            Try another search or domain.
-
-        </div>
-
-
-        <!-- Internship Cards -->
+        <!-- Internship listing section -->
         <section
-            id="internshipList"
-            class="internship-grid"
-            aria-label="Available internship listings"
-            aria-live="polite">
+            class="internship-section"
+            aria-labelledby="internship-heading"
+        >
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <h2 id="internship-heading">
+                        Available Internships
+                    </h2>
+
+                    <!-- Dynamic result count -->
+                    <p id="resultCount" aria-live="polite">
+                        0 internships found
+                    </p>
+
+                </div>
+
+                <!-- Error message -->
+                <div
+                    id="errorMessage"
+                    class="message error-message"
+                    role="alert"
+                    hidden
+                >
+                    Something went wrong. Please try again.
+                </div>
+
+                <!-- Empty state -->
+                <div
+                    id="emptyMessage"
+                    class="message empty-message"
+                    role="status"
+                    hidden
+                >
+                    No internships found. Try another search or domain.
+                </div>
+
+                <!-- Internship cards will be added here using JavaScript -->
+                <div
+                    id="internshipList"
+                    class="internship-grid"
+                    aria-live="polite"
+                >
+                </div>
+
+            </div>
+
         </section>
 
     </main>
-
 
     <!-- Footer -->
     <footer class="site-footer">
@@ -133,15 +167,14 @@
         <div class="container">
 
             <p>
-                Responsive Internship Board &copy; 2026
+                &copy; 2026 Internship Board. Built with HTML, CSS and JavaScript.
             </p>
 
         </div>
 
     </footer>
 
-
-    <!-- JavaScript -->
+    <!-- JavaScript file -->
     <script src="script.js"></script>
 
 </body>

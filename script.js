@@ -1,167 +1,82 @@
+// ========================================
+// Get HTML Elements
+// ========================================
+
 const internshipList = document.getElementById("internshipList");
+const resultCount = document.getElementById("resultCount");
+
 const searchInput = document.getElementById("searchInput");
 const domainFilter = document.getElementById("domainFilter");
+const searchForm = document.getElementById("searchForm");
 
-const loadingMessage = document.getElementById("loadingMessage");
-const errorMessage = document.getElementById("errorMessage");
 const emptyMessage = document.getElementById("emptyMessage");
+const errorMessage = document.getElementById("errorMessage");
+
+
+// ========================================
+// Internship Data
+// ========================================
 
 let internships = [];
 
 
-// ===============================
-// Load Internship JSON
-// ===============================
+// ========================================
+// Load Data from JSON
+// ========================================
 
 async function loadInternships() {
 
     try {
 
-        const response = await fetch(
-            "internship-records-sample.json"
-        );
+        const response = await fetch("internship-records-sample.json");
 
+        // Check JSON file response
         if (!response.ok) {
-            throw new Error("Unable to load internship data");
+            throw new Error("JSON file could not be loaded");
         }
 
         const data = await response.json();
 
-        if (!data.internships ||
-            !Array.isArray(data.internships)) {
-
-            throw new Error("Invalid JSON format");
-        }
-
+        // Get internships array from JSON object
         internships = data.internships;
 
-        loadingMessage.hidden = true;
-
-        createDomainOptions();
-
-        displayInternships(internships);
+        // Render internships
+        renderInternships(internships);
 
     } catch (error) {
 
-        console.error(error);
-
-        loadingMessage.hidden = true;
+        console.error("Error:", error);
 
         errorMessage.hidden = false;
+
+        errorMessage.textContent =
+            "Unable to load internships. Please try again.";
+
+        resultCount.textContent =
+            "Unable to load internships.";
     }
 }
 
 
-// ===============================
-// Create Domain Options
-// ===============================
+// ========================================
+// Render Internship Cards
+// ========================================
 
-function createDomainOptions() {
+function renderInternships(data) {
 
-    const domains = [
-        ...new Set(
-            internships.map(
-                internship => internship.domain
-            )
-        )
-    ];
-
-    domains.forEach(domain => {
-
-        const option =
-            document.createElement("option");
-
-        option.value = domain;
-
-        option.textContent = domain;
-
-        domainFilter.appendChild(option);
-    });
-}
-
-
-// ===============================
-// Create Internship Card
-// ===============================
-
-function createInternshipCard(internship) {
-
-    const card =
-        document.createElement("article");
-
-    card.className = "internship-card";
-
-    const skills =
-        internship.skills.join(", ");
-
-    card.innerHTML = `
-
-        <h2>${internship.title}</h2>
-
-        <p class="company">
-            Internship ID: ${internship.id}
-        </p>
-
-        <span class="domain">
-            ${internship.domain}
-        </span>
-
-        <p class="details">
-            📍 Location: ${internship.location}
-        </p>
-
-        <p class="details">
-            💼 Mode: ${internship.mode}
-        </p>
-
-        <p class="details">
-            🛠 Skills: ${skills}
-        </p>
-
-        <p class="details">
-            👥 Openings: ${internship.openings}
-        </p>
-
-        <button
-            type="button"
-            class="apply-button"
-            aria-label="Apply for ${internship.title}"
-        >
-            Apply Now
-        </button>
-    `;
-
-
-    // Apply button event
-
-    const applyButton =
-        card.querySelector(".apply-button");
-
-
-    applyButton.addEventListener(
-        "click",
-        function () {
-
-            alert(
-                `You selected: ${internship.title}`
-            );
-
-        }
-    );
-
-
-    return card;
-}
-
-
-// ===============================
-// Display Internships
-// ===============================
-
-function displayInternships(data) {
-
+    // Clear previous cards
     internshipList.innerHTML = "";
 
+    // Hide messages
+    emptyMessage.hidden = true;
+    errorMessage.hidden = true;
+
+    // Update result count
+    resultCount.textContent =
+        `${data.length} internships found`;
+
+
+    // Show empty state when no result is found
     if (data.length === 0) {
 
         emptyMessage.hidden = false;
@@ -169,91 +84,188 @@ function displayInternships(data) {
         return;
     }
 
-    emptyMessage.hidden = true;
+
+    // Create internship cards
+    data.forEach(function (internship) {
+
+        const card = document.createElement("article");
+
+        card.className = "internship-card";
 
 
-    data.forEach(internship => {
+        // Create card heading
+        const title = document.createElement("h3");
 
-        const card =
-            createInternshipCard(internship);
+        title.textContent = internship.title;
 
+
+        // Domain
+        const domain = document.createElement("span");
+
+        domain.className = "domain";
+
+        domain.textContent = internship.domain;
+
+
+        // Details
+        const mode = document.createElement("p");
+
+        mode.innerHTML =
+            `<strong>Mode:</strong> ${internship.mode}`;
+
+
+        const location = document.createElement("p");
+
+        location.innerHTML =
+            `<strong>Location:</strong> ${internship.location}`;
+
+
+        const skills = document.createElement("p");
+
+        skills.innerHTML =
+            `<strong>Skills:</strong> ${internship.skills.join(", ")}`;
+
+
+        const openings = document.createElement("p");
+
+        openings.innerHTML =
+            `<strong>Openings:</strong> ${internship.openings}`;
+
+
+        const id = document.createElement("p");
+
+        id.innerHTML =
+            `<strong>ID:</strong> ${internship.id}`;
+
+
+        // View button
+        const viewButton = document.createElement("button");
+
+        viewButton.type = "button";
+
+        viewButton.className = "apply-button";
+
+        viewButton.textContent = "View Internship";
+
+
+        // Keyboard and click accessible interaction
+        viewButton.addEventListener("click", function () {
+
+            alert(
+                `Internship: ${internship.title}\n` +
+                `Domain: ${internship.domain}\n` +
+                `Mode: ${internship.mode}\n` +
+                `Location: ${internship.location}`
+            );
+
+        });
+
+
+        // Add elements to card
+        card.appendChild(title);
+        card.appendChild(domain);
+        card.appendChild(mode);
+        card.appendChild(location);
+        card.appendChild(skills);
+        card.appendChild(openings);
+        card.appendChild(id);
+        card.appendChild(viewButton);
+
+
+        // Add card to page
         internshipList.appendChild(card);
 
     });
 }
 
 
-// ===============================
-// Search + Domain Filter
-// ===============================
+// ========================================
+// Search and Filter
+// ========================================
 
 function filterInternships() {
 
-    const searchText = searchInput.value
-        .toLowerCase()
-        .trim();
+    const searchText =
+        searchInput.value.toLowerCase().trim();
 
-    const selectedDomain = domainFilter.value;
+    const selectedDomain =
+        domainFilter.value;
 
-    const filtered = internships.filter(internship => {
 
-        // Create searchable text
-        const title = internship.title.toLowerCase();
-        const domain = internship.domain.toLowerCase();
+    const filteredData = internships.filter(function (internship) {
 
-        const skills = internship.skills.map(skill =>
-            skill.toLowerCase()
-        );
+        const skillsText =
+            internship.skills.join(" ");
 
-        // Match complete word
-        const searchRegex = new RegExp(
-            `\\b${searchText}\\b`,
-            "i"
-        );
 
+        const searchableText = `
+            ${internship.id}
+            ${internship.title}
+            ${internship.domain}
+            ${internship.mode}
+            ${internship.location}
+            ${skillsText}
+        `.toLowerCase();
+
+
+        // Search condition
         const matchesSearch =
-            searchText === "" ||
+            searchableText.includes(searchText);
 
-            searchRegex.test(title) ||
 
-            searchRegex.test(domain) ||
-
-            skills.some(skill =>
-                searchRegex.test(skill)
-            );
-
+        // Domain condition
         const matchesDomain =
             selectedDomain === "all" ||
             internship.domain === selectedDomain;
 
+
         return matchesSearch && matchesDomain;
+
     });
 
-    displayInternships(filtered);
+
+    renderInternships(filteredData);
 }
 
-// ===============================
-// Search Event
-// ===============================
 
-searchInput.addEventListener(
-    "input",
-    filterInternships
-);
+// ========================================
+// Search Form Submit
+// ========================================
 
+searchForm.addEventListener("submit", function (event) {
 
-// ===============================
-// Filter Event
-// ===============================
+    // Prevent page refresh
+    event.preventDefault();
 
-domainFilter.addEventListener(
-    "change",
-    filterInternships
-);
+    filterInternships();
+
+});
 
 
-// ===============================
+// ========================================
+// Live Search
+// ========================================
+
+searchInput.addEventListener("input", function () {
+
+    filterInternships();
+
+});
+
+
+// ========================================
+// Domain Filter
+// ========================================
+
+domainFilter.addEventListener("change", function () {
+
+    filterInternships();
+
+});
+
+
+// ========================================
 // Start Application
-// ===============================
+// ========================================
 
 loadInternships();
