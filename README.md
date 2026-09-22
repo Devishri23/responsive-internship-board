@@ -1,11 +1,7 @@
 # Responsive Internship Board
 
-## Project Description
-
 Responsive Internship Board is a simple and accessible web application that helps users find and explore internship opportunities.
-
 The website is responsive and works across mobile, tablet, and desktop devices.
-
 Internship data is loaded dynamically from a JSON file using JavaScript.
 
 ## Live Demo
