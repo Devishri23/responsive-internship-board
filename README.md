@@ -8,6 +8,10 @@ The website is responsive and works across mobile, tablet, and desktop devices.
 
 Internship data is loaded dynamically from a JSON file using JavaScript.
 
+## Live Demo
+
+[View Live Project](https://devishri23.github.io/responsive-internship-board/)
+
 ## Features
 
 * Responsive design for mobile, tablet, and desktop
@@ -101,9 +105,6 @@ The project includes:
 * Accessible buttons
 * Responsive layouts
 
-## Live Demo
-
-https://devishri23.github.io/responsive-internship-board/
 
 ## Project Status
 
